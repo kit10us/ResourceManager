@@ -15,9 +15,6 @@
     <ClInclude Include="rm\IFactoryFunctor.h">
       <Filter>rm</Filter>
     </ClInclude>
-    <ClInclude Include="rm\ISourceFactoryFunctor.h">
-      <Filter>rm</Filter>
-    </ClInclude>
     <ClInclude Include="rm\exception\ResourceNotFound.h">
       <Filter>rm\exception</Filter>
     </ClInclude>
