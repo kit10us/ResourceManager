@@ -1,0 +1,23 @@
+// Copyright (c) 2002 - 2018, Evil Quail LLC
+// All Rights Reserved
+
+#pragma once
+
+#include <unify/Path.h>
+#include <memory>
+
+namespace rm
+{
+	/// <summary>
+	/// Factory from a source path.
+	/// </summary>
+	template< typename T >
+	class ISourceFactory
+	{
+	public:
+		typedef std::shared_ptr< ISourceFactory< T > > shared_ptr;
+
+		~ISourceFactory() {}
+		virtual std::shared_ptr< T > Produce( unify::Path path, void * data ) = 0;
+	};
+}

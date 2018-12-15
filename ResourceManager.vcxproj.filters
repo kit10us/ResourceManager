@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="rm">
+      <UniqueIdentifier>{62f41515-7072-4370-b9b6-ea125220069b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rm\exception">
+      <UniqueIdentifier>{ee1726be-c9b7-4f68-9475-e761a4436176}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="rm\ResourcePack.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\IFactoryFunctor.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\ISourceFactoryFunctor.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\exception\ResourceNotFound.h">
+      <Filter>rm\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\exception\FailedToCreate.h">
+      <Filter>rm\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\ResourcePack.inl">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\FactoryFunctor1.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\FactoryFunctor3.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\FactoryFunctor2.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\IResourceManager.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\ResourceHub.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\IResource.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\AssetPaths.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\ILogger.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\ISourceFactory.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+    <ClInclude Include="rm\ResourceManager.h">
+      <Filter>rm</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="rm\ResourceHub.cpp">
+      <Filter>rm</Filter>
+    </ClCompile>
+    <ClCompile Include="rm\IResource.cpp">
+      <Filter>rm</Filter>
+    </ClCompile>
+    <ClCompile Include="rm\AssetPaths.cpp">
+      <Filter>rm</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rm\ResourceManager.inl">
+      <Filter>rm</Filter>
+    </None>
+  </ItemGroup>
+</Project>
