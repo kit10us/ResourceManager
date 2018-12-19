@@ -76,7 +76,7 @@ namespace rm
 		void Load( std::string type, std::string name, unify::Path path );
 
 	private:
-		std::map< std::string /*Resource name*/, std::shared_ptr< IResourceManagerRaw >, unify::CaseInsensitiveLessThanTest > m_managerMap;
+		std::map< std::string /*Resource name*/, std::shared_ptr< IResourceManagerRaw >, unify::string::CaseInsensitiveLessThanTest > m_managerMap;
 		std::vector< std::shared_ptr< IResourceManagerRaw > > m_managerList;
 	};
 

@@ -89,7 +89,7 @@ namespace rm
 		ILogger::ptr m_logger;
 		std::map< std::string, ResourcePtr > m_resourceMap;
 		std::vector< ResourcePtr > m_resourceList;
-		std::map< std::string, std::shared_ptr< ISourceFactory< T > >, unify::CaseInsensitiveLessThanTest > m_sourceFactories;
+		std::map< std::string, std::shared_ptr< ISourceFactory< T > >, unify::string::CaseInsensitiveLessThanTest > m_sourceFactories;
 	};
 
 	#include <rm/ResourceManager.inl>
