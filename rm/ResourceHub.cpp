@@ -14,6 +14,12 @@ ResourceHub::~ResourceHub()
 
 void ResourceHub::AddManager( std::shared_ptr< IResourceManagerRaw > manager )
 {
+	auto itr = m_managerMap.find( manager->GetName() );
+	if ( itr != m_managerMap.end() )
+	{
+		throw std::exception( std::string( "Manager \"" + manager->GetName() + "\" already exists!" ).c_str() );
+	}
+
 	m_managerMap[ manager->GetName() ] = manager;
 	m_managerList.push_back( manager );
 }

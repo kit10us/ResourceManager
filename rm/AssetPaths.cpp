@@ -12,6 +12,11 @@ AssetPaths::AssetPaths()
 {
 }
 
+AssetPaths::AssetPaths( const AssetPaths & assetPaths )
+	: m_paths{ assetPaths.m_paths }
+{
+}
+
 void AssetPaths::AddSource( unify::Path source )
 {
 	m_paths.push_back( source );

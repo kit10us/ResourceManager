@@ -4,6 +4,7 @@
 #pragma once
 
 #include <unify/Path.h>
+#include <memory>
 #include <list>
 
 namespace rm
@@ -11,7 +12,13 @@ namespace rm
 	class AssetPaths
 	{
 	public:
+		typedef std::shared_ptr< AssetPaths > ptr;
+
 		AssetPaths();
+		
+		AssetPaths( const AssetPaths & assetPaths );
+
+		~AssetPaths(){}
 
 		void AddSource( unify::Path source );
 		

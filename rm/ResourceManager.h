@@ -36,7 +36,7 @@ namespace rm
 
 		typedef std::shared_ptr< T > ResourcePtr;
 
-        ResourceManager( std::string resourceName, rm::AssetPaths * assetPaths = nullptr, ILogger::ptr = ILogger::ptr() );
+        ResourceManager( std::string resourceName, rm::AssetPaths::ptr assetPaths, ILogger::ptr = ILogger::ptr() );
 		~ResourceManager();	
 
 		void Clear();
@@ -45,8 +45,6 @@ namespace rm
 		ResourcePtr Add( std::string name, T * resource ) override;
 
 		ResourcePtr Add( std::string name, unify::Path source, unify::Path relativePath = unify::Path(), void * data = 0 );
-
-		ResourcePtr Add( unify::Path source, unify::Path relativePath = unify::Path(), void * data = 0 );
 
 		/// <summary>
 		/// Find an existing resource by name.
@@ -85,7 +83,7 @@ namespace rm
 
 	protected:
 		std::string m_resourceName;
-		rm::AssetPaths * m_assetPaths;
+		rm::AssetPaths::ptr m_assetPaths;
 		ILogger::ptr m_logger;
 		std::map< std::string, ResourcePtr > m_resourceMap;
 		std::vector< ResourcePtr > m_resourceList;

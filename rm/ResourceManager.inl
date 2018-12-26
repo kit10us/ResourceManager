@@ -2,7 +2,7 @@
 // All Rights Reserved
 
 template< class T >
-ResourceManager< T >::ResourceManager( std::string resourceName, rm::AssetPaths * assetPaths, ILogger::ptr logger )
+ResourceManager< T >::ResourceManager( std::string resourceName, rm::AssetPaths::ptr assetPaths, ILogger::ptr logger )
 	: m_resourceName( resourceName )
 	, m_assetPaths( assetPaths )
 	, m_logger( logger )
@@ -122,42 +122,6 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 	}
 
 	throw std::string( GetName() + " manager: No factory found that could produce \"" + name + "\"!" );
-}
-
-template< class T >
-std::shared_ptr< T > ResourceManager< T >::Add( unify::Path source, unify::Path relativePath, void * data )
-{
-	std::string extension = source.ExtensionOnly();
-	auto factory = m_sourceFactories.find( extension );
-	if( factory == m_sourceFactories.end() )
-	{
-		throw std::string( GetName() + " manager: No factory found that could produce \"" + source.Filename() + "\"!" );
-	}
-
-	unify::Path foundSource;
-	if( m_assetPaths != 0 )
-	{
-		foundSource = m_assetPaths->FindAsset( source, relativePath );
-	}
-
-	if( foundSource.Empty() )
-	{
-		throw unify::Exception( "Asset file not found! (\"" + source.ToString() + "\")" );
-	}
-
-	Log_WriteLine( "ResourceManager::Add", GetName() + " manager: adding \"" + foundSource.ToString() + "\"." );
-
-	std::string name;
-	auto product = factory->second->Produce( foundSource, data );
-	if( product )
-	{
-		name = product->GetName();
-		m_resourceMap[name] = product;
-		m_resourceList.push_back( product );
-		return product;
-	}
-
-	throw std::string( GetName() + " manager: No factory found that could produce \"" + source.Filename() + "\"!" );
 }
 
 template< typename T >
