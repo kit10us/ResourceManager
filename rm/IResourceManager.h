@@ -13,7 +13,7 @@ namespace rm
 	class IResourceManagerRaw
 	{
 	public:
-		typedef std::shared_ptr< IResourceManagerRaw > shared_ptr;
+		typedef std::shared_ptr< IResourceManagerRaw > ptr;
 
 		// Enable VTable...
 		virtual ~IResourceManagerRaw() {}
