@@ -1,4 +1,4 @@
-// Copyright (c) 2006 - 2014 Evil Quail LLC
+// Copyright (c) 2006 - 2014 Kit10 Studios LLC
 // All Rights Reserved
 
 #pragma once
