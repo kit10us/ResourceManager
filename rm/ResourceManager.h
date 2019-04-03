@@ -68,7 +68,9 @@ namespace rm
 		
 		void ForEach( ForEachFunctor & functor );
 
-		void AddFactory( std::string extension, std::shared_ptr< ISourceFactory< T > > factory );
+		void AddFactory( std::string extension, typename ISourceFactory< T >::ptr factory );
+
+		typename ISourceFactory< T > * GetFactory( std::string extension );
 
 		void Log_Write( std::string text );
 

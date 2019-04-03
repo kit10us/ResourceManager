@@ -91,12 +91,9 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 		return existingResource;
 	}
 
+
 	std::string extension = source.ExtensionOnly();
-	auto factory = m_sourceFactories.find( extension );
-	if( factory == m_sourceFactories.end() )
-	{
-		throw std::string( GetName() + " manager: No factory found that could produce \"" + name + "\"!" );
-	}
+	auto factory = GetFactory( extension );
 
 	unify::Path foundSource;
 	if ( m_assetPaths != 0 )
@@ -112,7 +109,7 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 	Log_WriteLine( "ResourceManager::Add", GetName() + " manager: adding \"" + name + "\" (" + foundSource.ToString() + ")." );
 
 
-	auto product = factory->second->Produce( foundSource, data );
+	auto product = factory->Produce( foundSource, data );
 	if( product )
 	{
 		product->SetName( name );
@@ -147,9 +144,25 @@ void ResourceManager< T >::ForEach( ForEachFunctor & functor )
 }
 
 template< typename T >
-void ResourceManager< T >::AddFactory( std::string extension, std::shared_ptr< ISourceFactory< T > > factory )
+void ResourceManager< T >::AddFactory( std::string extension, typename ISourceFactory< T >::ptr factory )
 {
 	m_sourceFactories[ ( ( extension[ 0 ] != '.' ) ? "." : "") + extension ] = factory;
+}
+
+template< typename T >
+typename ISourceFactory< T > * ResourceManager< T >::GetFactory( std::string extension )
+{
+	if ( ! extension.empty() && extension[ 0 ] != '.' )
+	{
+		extension = "." + extension;
+	}
+
+	auto factory = m_sourceFactories.find( extension );
+	if( factory == m_sourceFactories.end() )
+	{
+		throw std::string( GetName() + " manager: No factory found that produces a \"" + extension + "\"!" );
+	}
+	return factory->second.get();
 }
 								 
 template< typename T >

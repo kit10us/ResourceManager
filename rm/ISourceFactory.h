@@ -4,6 +4,7 @@
 #pragma once
 
 #include <unify/Path.h>
+#include <unify/Parameters.h>
 #include <memory>
 
 namespace rm
@@ -15,9 +16,11 @@ namespace rm
 	class ISourceFactory
 	{
 	public:
-		typedef std::shared_ptr< ISourceFactory< T > > shared_ptr;
+		typedef std::shared_ptr< ISourceFactory< T > > ptr;
 
 		~ISourceFactory() {}
 		virtual std::shared_ptr< T > Produce( unify::Path path, void * data ) = 0;
+		virtual std::shared_ptr< T > Produce( void * data ) = 0;
+		virtual std::shared_ptr< T > Produce( unify::Parameters parameters ) = 0;
 	};
 }
