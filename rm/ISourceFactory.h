@@ -19,8 +19,7 @@ namespace rm
 		typedef std::shared_ptr< ISourceFactory< T > > ptr;
 
 		~ISourceFactory() {}
-		virtual std::shared_ptr< T > Produce( unify::Path path, void * data ) = 0;
-		virtual std::shared_ptr< T > Produce( void * data ) = 0;
+		virtual std::shared_ptr< T > Produce( unify::Path path, unify::Parameters parameters = {} ) = 0;
 		virtual std::shared_ptr< T > Produce( unify::Parameters parameters ) = 0;
 	};
 }

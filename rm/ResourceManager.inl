@@ -80,7 +80,7 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, T * resource )
 }
 
 template< class T >
-std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path source, unify::Path relativePath, void * data )
+std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path source, unify::Path relativePath, unify::Parameters parameters )
 {
 	// Attempt to find the existing resource.
 	ResourcePtr existingResource = Find( name );
@@ -109,7 +109,7 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 	Log_WriteLine( "ResourceManager::Add", GetName() + " manager: adding \"" + name + "\" (" + foundSource.ToString() + ")." );
 
 
-	auto product = factory->Produce( foundSource, data );
+	auto product = factory->Produce( foundSource, parameters );
 	if( product )
 	{
 		product->SetName( name );

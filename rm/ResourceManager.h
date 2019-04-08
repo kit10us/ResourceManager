@@ -44,7 +44,7 @@ namespace rm
 		// Add an entry for a resource.
 		ResourcePtr Add( std::string name, T * resource ) override;
 
-		ResourcePtr Add( std::string name, unify::Path source, unify::Path relativePath = unify::Path(), void * data = 0 );
+		ResourcePtr Add( std::string name, unify::Path source, unify::Path relativePath = unify::Path(), unify::Parameters parameters = {} );
 
 		/// <summary>
 		/// Find an existing resource by name.
