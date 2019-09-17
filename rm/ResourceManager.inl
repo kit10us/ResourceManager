@@ -118,7 +118,7 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 		return product;
 	}
 
-	throw std::string( GetName() + " manager: No factory found that could produce \"" + name + "\"!" );
+	throw std::exception( std::string( GetName() + " manager: No factory found that could produce \"" + name + "\"!" ).c_str() );
 }
 
 template< typename T >
@@ -160,7 +160,7 @@ typename ISourceFactory< T > * ResourceManager< T >::GetFactory( std::string ext
 	auto factory = m_sourceFactories.find( extension );
 	if( factory == m_sourceFactories.end() )
 	{
-		throw std::string( GetName() + " manager: No factory found that produces a \"" + extension + "\"!" );
+		throw std::exception( std::string( GetName() + " manager: No factory found that produces a \"" + extension + "\"!" ).c_str() );
 	}
 	return factory->second.get();
 }
