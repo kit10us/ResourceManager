@@ -54,7 +54,7 @@ std::shared_ptr< T > ResourceManager< T >::Get( size_t index )
 template< class T >
 bool ResourceManager< T >::Exists( std::string name ) const
 {
-	std::map< std::string, ResourcePtr >::const_iterator itr = m_resourceMap.find( name );
+	typename std::map< std::string, ResourcePtr >::const_iterator itr = m_resourceMap.find( name );
 	return !( itr == m_resourceMap.end() );
 }
 
@@ -136,7 +136,7 @@ size_t ResourceManager< T >::Count() const
 template< class T >
 void ResourceManager< T >::ForEach( ForEachFunctor & functor )
 {
-	for( std::map< std::string, ResourcePtr >::iterator itr = m_resourceMap.begin(); itr != m_resourceMap.end(); ++itr )
+	for( auto itr = m_resourceMap.begin(); itr != m_resourceMap.end(); ++itr )
 	{
 		ResourcePtr resource = itr->second;
         functor( resource.get() );
