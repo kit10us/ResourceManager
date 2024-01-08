@@ -36,16 +36,8 @@ unify::Path AssetPaths::FindAsset( unify::Path path, unify::Path firstPlace )
 		}
 	}
 
-	const bool checked = true;
+	return {};
 
-	if( checked )
-	{
-		throw unify::Exception( "Asset \"" + path.ToString() + "\" not found!" );
-	}
-	else
-	{
-		return unify::Path();
-	}
 }
 
 std::string AssetPaths::GetPaths( unify::Path root ) const

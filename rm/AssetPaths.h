@@ -20,6 +20,12 @@ namespace rm
 
 		~AssetPaths(){}
 
+		// <summary>
+		// Find a pass to an asset.
+		// </summary>
+		// <return>
+		// Returns the path to the asset if found, else it returns an empty path.
+		// </return>
 		void AddSource( unify::Path source );
 		
 		unify::Path FindAsset( unify::Path path, unify::Path firstPlace = unify::Path() );
