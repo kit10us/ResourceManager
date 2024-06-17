@@ -28,8 +28,16 @@ namespace rm
 		// </return>
 		void AddSource( unify::Path source );
 		
+		/// <summary>
+		/// Find and return the first path to an asset.
+		/// </summary>
+		/// <returns></returns>
 		unify::Path FindAsset( unify::Path path, unify::Path firstPlace = unify::Path() );
 
+		/// <summary>
+		/// Returns a list of all possible paths.
+		/// </summary>
+		/// <returns></returns>
 		std::string GetPaths( unify::Path root = unify::Path() ) const;
 
 	private:

@@ -60,7 +60,7 @@ bool ResourceManager< T >::Exists( std::string name ) const
 
 // Add an already created resource so the memory is taken over by the manager.
 template< class T >
-std::shared_ptr< T > ResourceManager< T >::Add( std::string name, T * resource )
+unify::Result< std::shared_ptr<T> > ResourceManager< T >::Add(std::string name, T * resource)
 {
 	// Attempt to find the existing resource.
 	ResourcePtr existingResource = Find( name );
@@ -68,7 +68,7 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, T * resource )
 	// Fail if we are attempting to add a new resource over an existing one.
 	if( existingResource )
 	{
-		throw unify::Exception( "Attempted to add resource \"" + name + "\", when name is already in use by a different resource!" );
+		return unify::Failure("Attempted to add resource \"" + name + "\", when name is already in use by a different resource!");
 	}
 
 	ResourcePtr resourcePtr( resource );
@@ -80,7 +80,7 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, T * resource )
 }
 
 template< class T >
-std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path source, unify::Path relativePath, unify::Parameters parameters )
+unify::Result< std::shared_ptr<T> > ResourceManager< T >::Add(std::string name, unify::Path source, unify::Path relativePath, unify::Parameters parameters)
 {
 	// Attempt to find the existing resource.
 	ResourcePtr existingResource = Find( name );
@@ -90,7 +90,6 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 	{
 		return existingResource;
 	}
-
 
 	std::string extension = source.ExtensionOnly();
 	auto factory = GetFactory( extension );
@@ -103,7 +102,8 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 
 	if ( foundSource.Empty() )
 	{
-		throw unify::Exception( "Asset file not found! (name: \"" + name + "\", source: \"" + source.ToString() + "\")" );
+
+		return unify::Failure("Asset file not found! (name: \"" + name + "\", source: \"" + source.ToString() + "\", paths: " + m_assetPaths->GetPaths() + ")");
 	}
 
 	Log_WriteLine( "ResourceManager::Add", GetName() + " manager: adding \"" + name + "\" (" + foundSource.ToString() + ")." );
@@ -118,13 +118,13 @@ std::shared_ptr< T > ResourceManager< T >::Add( std::string name, unify::Path so
 		return product;
 	}
 
-	throw std::exception( std::string( GetName() + " manager: No factory found that could produce \"" + name + "\"!" ).c_str() );
+	return unify::Failure(GetName() + " manager: No factory found that could produce \"" + name + "\"!");
 }
 
 template< typename T >
-void ResourceManager< T >::AddResource( std::string name, unify::Path path )
+unify::Result<> ResourceManager< T >::AddResource( std::string name, unify::Path path )
 {
-	Add( name, path );
+	return Add(name, path).As<bool>(true);
 }
 
 template< class T >

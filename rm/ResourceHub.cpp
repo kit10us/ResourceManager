@@ -12,16 +12,18 @@ ResourceHub::~ResourceHub()
 {
 }
 
-void ResourceHub::AddManager( std::shared_ptr< IResourceManagerRaw > manager )
+unify::Result<> ResourceHub::AddManager( std::shared_ptr< IResourceManagerRaw > manager)
 {
 	auto itr = m_managerMap.find( manager->GetName() );
 	if ( itr != m_managerMap.end() )
 	{
-		throw std::exception( std::string( "Manager \"" + manager->GetName() + "\" already exists!" ).c_str() );
+		return unify::Failure("Manager \"" + manager->GetName() + "\" already exists!");
 	}
 
 	m_managerMap[ manager->GetName() ] = manager;
 	m_managerList.push_back( manager );
+
+	return {};
 }
 
 void ResourceHub::Clear()
@@ -49,9 +51,9 @@ std::string ResourceHub::GetTypeName( size_t index ) const
 	return m_managerList[ index ]->GetName();
 }
 
-void ResourceHub::Load( std::string type, std::string name, unify::Path path )
+unify::Result<> ResourceHub::Load( std::string type, std::string name, unify::Path path )
 {
-	m_managerMap[type]->AddResource( name, path );
+	return m_managerMap[type]->AddResource( name, path );
 }
 
 IResourceManagerRaw * ResourceHub::GetManagerRaw( std::string name )

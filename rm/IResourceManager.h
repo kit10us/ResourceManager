@@ -3,6 +3,7 @@
 #include <rm/IResource.h>
 #include <qxml/Element.h>
 #include <unify/Path.h>
+#include <unify/Result.h>
 #include <map>
 #include <list>
 #include <string>
@@ -27,7 +28,7 @@ namespace rm
 		/// Add resource without return. This allows us to 
 		/// add resources in bulk, regardless of type (not template at this point, so we don't have to know the resource type).
 		/// </summary>
-		virtual void AddResource( std::string name, unify::Path path ) = 0;
+		virtual unify::Result<> AddResource( std::string name, unify::Path path ) = 0;
 
 		virtual IResource* GetResource( std::string name ) = 0;
 
@@ -60,6 +61,6 @@ namespace rm
 		/// Throws an exception if a resource already exists with the same ID, since we are passing in an already allocated resource,
 		/// this could lead to a unmanaged resource pointer.
 		/// </summary>
-		virtual ResourcePtr Add( std::string name, T * resource ) = 0;
+		virtual unify::Result<ResourcePtr> Add(std::string name, T* resource) = 0;
 	};
 }

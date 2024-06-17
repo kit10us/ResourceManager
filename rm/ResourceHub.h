@@ -3,6 +3,7 @@
 #include <rm/IResourceManager.h>
 #include <unify/Cast.h>
 #include <unify/String.h>
+#include <unify/Result.h>
 #include <map>
 #include <memory>
 
@@ -26,7 +27,7 @@ namespace rm
 		/// <summary>
 		/// Add a resource manager.
 		/// </summary>
-		void AddManager( std::shared_ptr< IResourceManagerRaw > manager );
+		unify::Result<> AddManager(std::shared_ptr< IResourceManagerRaw > manager);
 
 		/// <summary>
 		/// Remove all resource managers.
@@ -73,7 +74,7 @@ namespace rm
 		///<summary>
 		/// Load a resource file.
 		///</summary>
-		void Load( std::string type, std::string name, unify::Path path );
+		unify::Result<> Load( std::string type, std::string name, unify::Path path );
 
 	private:
 		std::map< std::string /*Resource name*/, std::shared_ptr< IResourceManagerRaw >, unify::string::CaseInsensitiveLessThanEqualTest > m_managerMap;

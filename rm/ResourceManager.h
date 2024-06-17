@@ -8,10 +8,10 @@
 
 #pragma once
 
+#include <unify/Result.h>
 #include <rm/ILogger.h>
 #include <rm/ISourceFactory.h>
 #include <rm/IResourceManager.h>
-#include <unify/Exception.h>
 #include <rm/AssetPaths.h>
 #include <map>
 #include <memory>
@@ -42,9 +42,9 @@ namespace rm
 		void Clear();
 
 		// Add an entry for a resource.
-		ResourcePtr Add( std::string name, T * resource ) override;
+		unify::Result<ResourcePtr> Add(std::string name, T* resource) override;
 
-		ResourcePtr Add( std::string name, unify::Path source, unify::Path relativePath = unify::Path(), unify::Parameters parameters = {} );
+		unify::Result<ResourcePtr> Add(std::string name, unify::Path source, unify::Path relativePath = unify::Path(), unify::Parameters parameters = {});
 
 		/// <summary>
 		/// Find an existing resource by name.
@@ -78,7 +78,7 @@ namespace rm
 
 	public: // IResourceManagerRaw...
 		std::string GetName() const override;
-		void AddResource( std::string name, unify::Path path ) override;
+		unify::Result<> AddResource( std::string name, unify::Path path ) override;
 		bool Exists( std::string name ) const override;
 		size_t Count() const override;
 		void Clean() override;
